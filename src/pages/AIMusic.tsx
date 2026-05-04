@@ -115,6 +115,22 @@ const AIMusic = () => {
     a.click();
   };
 
+  const handleShare = async (track: GeneratedTrack) => {
+    try {
+      const filename = `${track.name.replace(/\s+/g, "_")}.mp3`;
+      const result = await shareFile({
+        url: track.audioUrl,
+        filename,
+        mimeType: "audio/mpeg",
+        title: track.name,
+        text: `${track.genre} · ${track.mood} · made with AIFilmz`,
+      });
+      if (result === "download") toast.success("Track downloaded");
+    } catch (err: any) {
+      if (err?.name !== "AbortError") toast.error("Couldn't open share sheet");
+    }
+  };
+
   const handleSaveToLibrary = (track: GeneratedTrack) => {
     musicLibrary.addTrack({
       id: track.id,
