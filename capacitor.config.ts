@@ -10,6 +10,8 @@ const config: CapacitorConfig = {
   },
   ios: {
     contentInset: 'always',
+    // Custom URL scheme for deep links: goldenhourai://editor?project=<id>
+    scheme: 'goldenhourai',
   },
 };
 

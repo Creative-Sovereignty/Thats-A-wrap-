@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Film, FolderOpen } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -53,6 +54,7 @@ interface ProjectOption {
 
 const VideoEditor = () => {
   const { user } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [tracks, setTracks] = useState<TimelineTrack[]>(defaultTracks);
   const [clips, setClips] = useState<TimelineClip[]>(demoClips);
   const [currentFrame, setCurrentFrame] = useState(0);
@@ -88,6 +90,26 @@ const VideoEditor = () => {
     };
     loadProjects();
   }, [user]);
+
+  // Deep-link: respect ?project=<id> from URL (web links + iOS deep links)
+  useEffect(() => {
+    const projectParam = searchParams.get("project");
+    if (projectParam && projectParam !== selectedProjectId) {
+      setSelectedProjectId(projectParam);
+    }
+  }, [searchParams, selectedProjectId]);
+
+  // Keep URL in sync when user changes project via the dropdown
+  useEffect(() => {
+    const current = searchParams.get("project");
+    if (selectedProjectId && current !== selectedProjectId) {
+      setSearchParams({ project: selectedProjectId }, { replace: true });
+    } else if (!selectedProjectId && current) {
+      const next = new URLSearchParams(searchParams);
+      next.delete("project");
+      setSearchParams(next, { replace: true });
+    }
+  }, [selectedProjectId, searchParams, setSearchParams]);
 
   // Load shots when project selected
   useEffect(() => {

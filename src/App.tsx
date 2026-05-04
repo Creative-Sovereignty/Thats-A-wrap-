@@ -33,6 +33,7 @@ import ChatWidget from "./components/ChatWidget";
 import ScrollToTop from "./components/ScrollToTop";
 import PWAInstallBanner from "./components/PWAInstallBanner";
 import RouteTransition from "./components/RouteTransition";
+import DeepLinkHandler from "./components/DeepLinkHandler";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <AnalyticsTracker />
+            <DeepLinkHandler />
             <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background"><div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>}>
               <RouteTransition>
                 <Routes>
