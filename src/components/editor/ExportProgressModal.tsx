@@ -1,8 +1,10 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Download, Loader2, CheckCircle2, XCircle, Film, HardDrive, Cpu } from "lucide-react";
+import { Download, Loader2, CheckCircle2, XCircle, Film, HardDrive, Cpu, Share2 } from "lucide-react";
 import type { ExportStage } from "@/hooks/useTimelineExport";
+import { shareFile } from "@/lib/nativeShare";
+import { toast } from "sonner";
 
 interface ExportProgressModalProps {
   open: boolean;
