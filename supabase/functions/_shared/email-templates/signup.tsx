@@ -29,14 +29,14 @@ export const SignupEmail = ({
 }: SignupEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Welcome to Golden Hour AI — confirm your email</Preview>
+    <Preview>Welcome to AIFilmz — confirm your email</Preview>
     <Body style={main}>
       <Container style={container}>
         <Heading style={h1}>Welcome aboard ✨</Heading>
         <Text style={text}>
           Thanks for joining{' '}
           <Link href={siteUrl} style={link}>
-            <strong>Golden Hour AI</strong>
+            <strong>AIFilmz</strong>
           </Link>
           — your AI-powered movie studio.
         </Text>

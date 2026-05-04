@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
  * and forwards them to React Router so deep links open the right in-app screen.
  *
  * Supported link shapes:
- *   https://goldenhourai.app/editor?project=<id>
- *   goldenhourai://editor?project=<id>
+ *   https://aifilmz.app/editor?project=<id>
+ *   aifilmz://editor?project=<id>
  */
 const DeepLinkHandler = () => {
   const navigate = useNavigate();

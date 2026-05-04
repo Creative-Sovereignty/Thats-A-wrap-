@@ -29,12 +29,12 @@ export const EmailChangeEmail = ({
 }: EmailChangeEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Confirm your email change for Golden Hour AI</Preview>
+    <Preview>Confirm your email change for AIFilmz</Preview>
     <Body style={main}>
       <Container style={container}>
         <Heading style={h1}>Confirm email change</Heading>
         <Text style={text}>
-          You requested to change your Golden Hour AI email from{' '}
+          You requested to change your AIFilmz email from{' '}
           <Link href={`mailto:${email}`} style={link}>{email}</Link>{' '}
           to{' '}
           <Link href={`mailto:${newEmail}`} style={link}>{newEmail}</Link>.

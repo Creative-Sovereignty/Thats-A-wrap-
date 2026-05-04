@@ -24,12 +24,12 @@ export const MagicLinkEmail = ({
 }: MagicLinkEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Your login link for Golden Hour AI</Preview>
+    <Preview>Your login link for AIFilmz</Preview>
     <Body style={main}>
       <Container style={container}>
         <Heading style={h1}>Your login link</Heading>
         <Text style={text}>
-          Click the button below to log in to Golden Hour AI. This link will
+          Click the button below to log in to AIFilmz. This link will
           expire shortly.
         </Text>
         <Button style={button} href={confirmationUrl}>

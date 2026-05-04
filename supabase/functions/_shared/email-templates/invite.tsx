@@ -27,14 +27,14 @@ export const InviteEmail = ({
 }: InviteEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>You've been invited to Golden Hour AI</Preview>
+    <Preview>You've been invited to AIFilmz</Preview>
     <Body style={main}>
       <Container style={container}>
         <Heading style={h1}>You're invited ✨</Heading>
         <Text style={text}>
           You've been invited to join{' '}
           <Link href={siteUrl} style={link}>
-            <strong>Golden Hour AI</strong>
+            <strong>AIFilmz</strong>
           </Link>
           . Click below to accept and create your account.
         </Text>

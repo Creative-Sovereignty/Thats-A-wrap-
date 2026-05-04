@@ -19,7 +19,7 @@ interface ReauthenticationEmailProps {
 export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Your Golden Hour AI verification code</Preview>
+    <Preview>Your AIFilmz verification code</Preview>
     <Body style={main}>
       <Container style={container}>
         <Heading style={h1}>Verification code</Heading>

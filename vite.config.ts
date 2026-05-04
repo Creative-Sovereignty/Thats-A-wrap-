@@ -35,8 +35,8 @@ export default defineConfig(({ mode }) => ({
         ],
       },
       manifest: {
-        name: "Golden Hour AI — AI-Powered Filmmaking Studio",
-        short_name: "Golden Hour AI",
+        name: "AIFilmz — AI-Powered Filmmaking Studio",
+        short_name: "AIFilmz",
         description: "Create stunning short films from script to screen with AI.",
         theme_color: "#161620",
         background_color: "#161620",
