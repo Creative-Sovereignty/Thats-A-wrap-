@@ -274,10 +274,10 @@ const Landing = () => {
       {/* Nav */}
       <nav className="fixed top-0 w-full z-50 border-b border-border/30 bg-background/60 backdrop-blur-2xl">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2" aria-label="Golden Hour AI — home">
+          <Link to="/" className="flex items-center gap-2" aria-label="AIFilmz — home">
             <img
               src={logoImg}
-              alt="Golden Hour AI logo"
+              alt="AIFilmz logo"
               width={40}
               height={40}
               className="h-10 w-10 object-contain logo-gold-ring"
@@ -633,14 +633,14 @@ const Landing = () => {
       <footer className="border-t border-border py-12 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <img src={logoImg} alt="Golden Hour AI" className="h-8 object-contain logo-gold-ring" />
+            <img src={logoImg} alt="AIFilmz" className="h-8 object-contain logo-gold-ring" />
           </div>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
             <Link to="/help" className="hover:text-foreground transition-colors">Help</Link>
             <Link to="/install" className="hover:text-foreground transition-colors text-gold-shimmer">Install App</Link>
           </div>
-          <p className="text-xs text-muted-foreground">© 2026 Golden Hour AI. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">© 2026 AIFilmz. All rights reserved.</p>
         </div>
       </footer>
     </div>);

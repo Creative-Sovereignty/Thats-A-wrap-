@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://gldhourai.lovable.app/sitemap.xml
+Sitemap: https://aifilmz.lovable.app/sitemap.xml

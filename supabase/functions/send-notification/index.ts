@@ -40,7 +40,7 @@ async function createVapidJwt(audience: string): Promise<string> {
 
   const header = { typ: "JWT", alg: "ES256" };
   const now = Math.floor(Date.now() / 1000);
-  const payload = { aud: audience, exp: now + 86400, sub: "mailto:notifications@goldenhourai.app" };
+  const payload = { aud: audience, exp: now + 86400, sub: "mailto:notifications@aifilmz.app" };
 
   const enc = new TextEncoder();
   const headerB64 = uint8ArrayToBase64Url(enc.encode(JSON.stringify(header)));
