@@ -310,8 +310,16 @@ const AIMusic = () => {
                       {savedIds.has(track.id) ? <Check className="w-4 h-4" /> : <BookmarkPlus className="w-4 h-4" />}
                     </button>
                     <button
+                      onClick={() => handleShare(track)}
+                      className="p-2 rounded-lg hover:bg-[var(--neon-cyan-10)] text-muted-foreground hover:text-foreground transition-colors"
+                      title="Share / Export"
+                    >
+                      <Share2 className="w-4 h-4" />
+                    </button>
+                    <button
                       onClick={() => handleDownload(track)}
                       className="p-2 rounded-lg hover:bg-[var(--neon-purple-10)] text-muted-foreground hover:text-foreground transition-colors"
+                      title="Download"
                     >
                       <Download className="w-4 h-4" />
                     </button>
