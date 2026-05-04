@@ -37,8 +37,24 @@ const ExportProgressModal = ({
     if (!downloadUrl) return;
     const a = document.createElement("a");
     a.href = downloadUrl;
-    a.download = `golden-hour-export-${Date.now()}.mp4`;
+    a.download = `aifilmz-export-${Date.now()}.mp4`;
     a.click();
+  };
+
+  const handleShare = async () => {
+    if (!downloadUrl) return;
+    try {
+      const result = await shareFile({
+        url: downloadUrl,
+        filename: `aifilmz-export-${Date.now()}.mp4`,
+        mimeType: "video/mp4",
+        title: "My AIFilmz Export",
+        text: "Made with AIFilmz",
+      });
+      if (result === "download") toast.success("Video downloaded");
+    } catch (err: any) {
+      if (err?.name !== "AbortError") toast.error("Couldn't open share sheet");
+    }
   };
 
   return (
