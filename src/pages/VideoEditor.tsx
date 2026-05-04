@@ -54,6 +54,7 @@ interface ProjectOption {
 
 const VideoEditor = () => {
   const { user } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [tracks, setTracks] = useState<TimelineTrack[]>(defaultTracks);
   const [clips, setClips] = useState<TimelineClip[]>(demoClips);
   const [currentFrame, setCurrentFrame] = useState(0);
