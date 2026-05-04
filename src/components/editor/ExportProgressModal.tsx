@@ -122,13 +122,17 @@ const ExportProgressModal = ({
 
         <DialogFooter>
           {stage === "complete" && downloadUrl ? (
-            <div className="flex gap-2 w-full">
+            <div className="flex flex-col sm:flex-row gap-2 w-full">
               <Button variant="outline" onClick={() => { onReset(); onOpenChange(false); }} className="flex-1">
                 Close
               </Button>
+              <Button variant="outline" onClick={handleShare} className="flex-1">
+                <Share2 className="w-4 h-4 mr-1" />
+                Share
+              </Button>
               <Button variant="glow" onClick={handleDownload} className="flex-1">
                 <Download className="w-4 h-4 mr-1" />
-                Download MP4
+                Download
               </Button>
             </div>
           ) : stage === "error" ? (
