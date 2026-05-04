@@ -34,12 +34,21 @@ import ScrollToTop from "./components/ScrollToTop";
 import PWAInstallBanner from "./components/PWAInstallBanner";
 import RouteTransition from "./components/RouteTransition";
 import DeepLinkHandler from "./components/DeepLinkHandler";
+import AuthLoadingScreen from "./components/AuthLoadingScreen";
+import { useAuth } from "@/contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
 function AnalyticsTracker() {
   usePageTracking();
   return null;
+}
+
+/** Defers a child until Supabase has restored the session — prevents iOS flash of "logged out" state. */
+function AuthGate({ children }: { children: React.ReactNode }) {
+  const { initialized } = useAuth();
+  if (!initialized) return <AuthLoadingScreen />;
+  return <>{children}</>;
 }
 
 const App = () => (
@@ -56,7 +65,7 @@ const App = () => (
               <RouteTransition>
                 <Routes>
                   <Route path="/" element={<Landing />} />
-                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/auth" element={<AuthGate><Auth /></AuthGate>} />
                   <Route path="/reset-password" element={<ResetPassword />} />
                   <Route path="/install" element={<Install />} />
                   <Route path="/faq" element={<FAQ />} />
