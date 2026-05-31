@@ -86,6 +86,8 @@ const App = () => (
                   <Route path="/director" element={<DirectorAI />} />
                   <Route path="/festival" element={<ProtectedRoute><FestivalGallery /></ProtectedRoute>} />
                   <Route path="/checkout-success" element={<ProtectedRoute><CheckoutSuccess /></ProtectedRoute>} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/terms" element={<Terms />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </RouteTransition>
