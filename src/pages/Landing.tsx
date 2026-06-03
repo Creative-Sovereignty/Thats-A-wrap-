@@ -401,7 +401,7 @@ const Landing = () => {
                 initial="hidden"
                 animate="visible"
                 className="contents">
-                <div className="relative inline-block mt-1 mb-3 sm:mb-4 md:mb-5">
+                <div className="relative inline-flex items-center justify-center gap-4 sm:gap-6 mt-1 mb-3 sm:mb-4 md:mb-5">
                   <motion.span
                     variants={heroBadgeVariants}
                     className="inline-block px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-[var(--gold-dark)] via-[var(--gold)] to-[var(--gold-bright)] text-[var(--w3-void)] font-display font-black text-4xl sm:text-5xl md:text-7xl leading-[1] tracking-wide"
@@ -411,39 +411,38 @@ const Landing = () => {
                     
                     Movie Studio
                   </motion.span>
+
+                  {/* Hero logo — sits to the right of the Movie Studio badge */}
+                  <motion.div
+                    className="shrink-0 w-32 h-32 sm:w-44 sm:h-44 md:w-60 md:h-60"
+                    style={{
+                      transformPerspective: 700,
+                      rotateX,
+                      rotateY,
+                      x: translateX,
+                      y: translateY,
+                      willChange: "transform",
+                    }}
+                  >
+                    <motion.img
+                      src={logoImg}
+                      alt=""
+                      role="presentation"
+                      aria-hidden="true"
+                      width={288}
+                      height={288}
+                      loading="eager"
+                      // @ts-expect-error: fetchpriority is a valid HTML attribute, not yet typed in React
+                      fetchpriority="high"
+                      decoding="async"
+                      className="block w-full h-full object-contain logo-gold-ring drop-shadow-[0_0_40px_var(--gold-30)]"
+                      variants={heroLogoVariants}
+                      whileHover={{ scale: 1.04, rotate: 1.5, transition: { type: "spring", stiffness: 220, damping: 14 } }}
+                      style={{ willChange: "transform, opacity" }}
+                    />
+                  </motion.div>
                 </div>
 
-                {/* Hero logo — decorative; the H1 above conveys the brand for SEO & SR.
-                    Outer wrapper owns the cursor-follow parallax (rotate/x/y).
-                    Inner motion.img owns the entrance variants — they never collide. */}
-                <motion.div
-                  className="mx-auto mt-6 sm:mt-8 mb-2 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
-                  style={{
-                    transformPerspective: 700,
-                    rotateX,
-                    rotateY,
-                    x: translateX,
-                    y: translateY,
-                    willChange: "transform",
-                  }}
-                >
-                  <motion.img
-                    src={logoImg}
-                    alt=""
-                    role="presentation"
-                    aria-hidden="true"
-                    width={208}
-                    height={208}
-                    loading="eager"
-                    // @ts-expect-error: fetchpriority is a valid HTML attribute, not yet typed in React
-                    fetchpriority="high"
-                    decoding="async"
-                    className="block w-full h-full object-contain logo-gold-ring drop-shadow-[0_0_40px_var(--gold-30)]"
-                    variants={heroLogoVariants}
-                    whileHover={{ scale: 1.04, rotate: 1.5, transition: { type: "spring", stiffness: 220, damping: 14 } }}
-                    style={{ willChange: "transform, opacity" }}
-                  />
-                </motion.div>
 
                 {/* Subtitle — next beat in the synchronized timeline */}
                 <motion.p
