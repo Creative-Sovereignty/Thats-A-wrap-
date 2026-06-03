@@ -35,8 +35,8 @@ export default defineConfig(({ mode }) => ({
         ],
       },
       manifest: {
-        name: "AIFilmz — AI-Powered Filmmaking Studio",
-        short_name: "AIFilmz",
+        name: "That's A Wrap — AI-Powered Filmmaking Studio",
+        short_name: "That's A Wrap",
         description: "Create stunning short films from script to screen with AI.",
         theme_color: "#161620",
         background_color: "#161620",

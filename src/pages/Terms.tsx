@@ -13,7 +13,7 @@ const Terms = () => {
         >
           <div className="flex items-center justify-center mb-4">
             <Link to="/">
-              <img src={logoImg} alt="AIFilmz" className="h-14 object-contain logo-gold-ring" />
+              <img src={logoImg} alt="That's A Wrap" className="h-14 object-contain logo-gold-ring" />
             </Link>
           </div>
           <h1 className="text-3xl font-bold text-gold-blue-shimmer">Terms of Service</h1>
@@ -24,7 +24,7 @@ const Terms = () => {
           <section className="space-y-2">
             <h2 className="text-xl font-semibold text-gold-blue-shimmer">1. Acceptance of Terms</h2>
             <p>
-              By accessing or using <a href="https://aifilmz.app" className="text-primary underline">aifilmz.app</a> ("AIFilmz",
+              By accessing or using <a href="https://aifilmz.app" className="text-primary underline">aifilmz.app</a> ("That's A Wrap",
               the "Service"), you agree to be bound by these Terms of Service. If you do not
               agree, do not use the Service.
             </p>
@@ -34,14 +34,14 @@ const Terms = () => {
             <h2 className="text-xl font-semibold text-gold-blue-shimmer">2. Accounts</h2>
             <p>
               You must provide accurate information when creating an account and are responsible
-              for safeguarding your credentials. You must be at least 13 years old to use AIFilmz.
+              for safeguarding your credentials. You must be at least 13 years old to use That's A Wrap.
             </p>
           </section>
 
           <section className="space-y-2">
             <h2 className="text-xl font-semibold text-gold-blue-shimmer">3. Credits, Plans & Billing</h2>
             <p>
-              AIFilmz operates on a credit system (text 1, image 2, audio/director 3, video 10).
+              That's A Wrap operates on a credit system (text 1, image 2, audio/director 3, video 10).
               Paid plans (Pro, Studio) are billed via Stripe. Credits are deducted only on
               successful generation. Subscriptions renew automatically until cancelled from
               Settings. Refunds are at our discretion.
@@ -52,14 +52,14 @@ const Terms = () => {
             <h2 className="text-xl font-semibold text-gold-blue-shimmer">4. Your Content</h2>
             <p>
               You retain all rights to scripts, storyboards, videos, and music you create with
-              AIFilmz. By using the Service, you grant us a limited license to process and store
+              That's A Wrap. By using the Service, you grant us a limited license to process and store
               your content solely to operate the Service.
             </p>
           </section>
 
           <section className="space-y-2">
             <h2 className="text-xl font-semibold text-gold-blue-shimmer">5. Acceptable Use</h2>
-            <p>You agree not to use AIFilmz to:</p>
+            <p>You agree not to use That's A Wrap to:</p>
             <ul className="list-disc pl-6 space-y-1">
               <li>Generate illegal, harmful, hateful, or sexually explicit content involving minors.</li>
               <li>Infringe intellectual property rights or impersonate others.</li>
@@ -89,7 +89,7 @@ const Terms = () => {
             <h2 className="text-xl font-semibold text-gold-blue-shimmer">8. Limitation of Liability</h2>
             <p>
               The Service is provided "as is" without warranties. To the maximum extent permitted
-              by law, AIFilmz is not liable for indirect, incidental, or consequential damages.
+              by law, That's A Wrap is not liable for indirect, incidental, or consequential damages.
             </p>
           </section>
 

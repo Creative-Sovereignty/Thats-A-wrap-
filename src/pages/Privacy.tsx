@@ -13,7 +13,7 @@ const Privacy = () => {
         >
           <div className="flex items-center justify-center mb-4">
             <Link to="/">
-              <img src={logoImg} alt="AIFilmz" className="h-14 object-contain logo-gold-ring" />
+              <img src={logoImg} alt="That's A Wrap" className="h-14 object-contain logo-gold-ring" />
             </Link>
           </div>
           <h1 className="text-3xl font-bold text-gold-blue-shimmer">Privacy Policy</h1>
@@ -24,7 +24,7 @@ const Privacy = () => {
           <section className="space-y-2">
             <h2 className="text-xl font-semibold text-gold-blue-shimmer">1. Introduction</h2>
             <p>
-              AIFilmz ("we", "us") operates <a href="https://aifilmz.app" className="text-primary underline">aifilmz.app</a> — an
+              That's A Wrap ("we", "us") operates <a href="https://aifilmz.app" className="text-primary underline">aifilmz.app</a> — an
               AI-native filmmaking studio. This Privacy Policy explains what data we collect,
               how we use it, and the choices you have.
             </p>

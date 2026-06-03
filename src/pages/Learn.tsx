@@ -26,7 +26,7 @@ const wikiSections: WikiSection[] = [
     icon: Zap,
     title: "Getting Started",
     content: [
-      "**Welcome to AIFilmz** — your AI-native filmmaking studio. This guide covers every feature so you can go from script to screen.",
+      "**Welcome to That's A Wrap** — your AI-native filmmaking studio. This guide covers every feature so you can go from script to screen.",
       "**1. Sign up / Log in** — Create an account with your email. You'll receive a verification link before you can access the studio.",
       "**2. Create a Project** — From the Dashboard, click **+ New Project**. Give it a title and optional description. Every project is your central hub for a single film or video.",
       "**3. Navigate** — Use the sidebar on the left to jump between tools: Script Editor, Director AI, Shot List, Storyboard, AI Studio, Video Editor, AI Music, and more. On mobile, tap the ☰ hamburger menu.",
@@ -133,7 +133,7 @@ const wikiSections: WikiSection[] = [
     content: [
       "The **Settings** page lets you manage your account and project preferences.",
       "**Profile** — Update your display name, avatar, and bio.",
-      "**Theme** — AIFilmz is dark-mode by default. Theme preferences are saved per device.",
+      "**Theme** — That's A Wrap is dark-mode by default. Theme preferences are saved per device.",
       "**Project settings** — Rename or update the description of your active project.",
       "**Account** — Manage your email, password, and sign-out.",
     ],
@@ -143,7 +143,7 @@ const wikiSections: WikiSection[] = [
     icon: CreditCard,
     title: "Credits & Usage",
     content: [
-      "AIFilmz uses a **credit system** to manage AI operations.",
+      "That's A Wrap uses a **credit system** to manage AI operations.",
       "**Credit costs:**\n- Storyboard image generation — **2 credits**\n- AI Music generation — **3 credits**\n- AI Video generation (Luma Dream Machine) — **10 credits**\n- Director AI & Script AI suggestions — credits vary",
       "**Checking balance** — Your current credit balance is displayed in the top bar, on the Dashboard, and at the top of the AI Studio page.",
       "**Transaction history** — View a detailed log of all credit-consuming actions in Settings → Usage.",
@@ -169,7 +169,7 @@ const wikiSections: WikiSection[] = [
     icon: BarChart3,
     title: "Analytics Docs",
     content: [
-      "The **Analytics Docs** page documents the event tracking system built into AIFilmz.",
+      "The **Analytics Docs** page documents the event tracking system built into That's A Wrap.",
       "**Page views** — Every page navigation is tracked automatically.",
       "**Custom events** — Key actions (project creation, shot generation, video export) fire analytics events.",
       "**Privacy** — Analytics data is anonymized and used only to improve the platform. No personal data is shared with third parties.",
@@ -245,7 +245,7 @@ const Learn = () => {
             <div>
               <h1 className="font-display text-2xl font-bold text-gold-blue-shimmer">App Wiki</h1>
               <p className="text-sm text-muted-foreground">
-                Everything you need to know about AIFilmz
+                Everything you need to know about That's A Wrap
               </p>
             </div>
           </div>
