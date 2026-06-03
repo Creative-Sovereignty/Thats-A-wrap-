@@ -556,6 +556,36 @@ export type Database = {
         }
         Relationships: []
       }
+      video_generations: {
+        Row: {
+          created_at: string
+          credited: boolean
+          generation_id: string
+          id: string
+          provider: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          credited?: boolean
+          generation_id: string
+          id?: string
+          provider?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          credited?: boolean
+          generation_id?: string
+          id?: string
+          provider?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       videos: {
         Row: {
           created_at: string
@@ -637,6 +667,15 @@ export type Database = {
       enqueue_email: {
         Args: { payload: Json; queue_name: string }
         Returns: number
+      }
+      get_contest_participant_profile: {
+        Args: { _user_id: string }
+        Returns: {
+          avatar_url: string
+          bio: string
+          display_name: string
+          id: string
+        }[]
       }
       is_own_project: { Args: { _project_id: string }; Returns: boolean }
       is_own_script: { Args: { _script_id: string }; Returns: boolean }
