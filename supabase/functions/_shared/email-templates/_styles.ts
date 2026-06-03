@@ -28,7 +28,7 @@ export const logo = {
 export const h1 = {
   fontSize: '24px',
   fontWeight: 'bold' as const,
-  color: '#FFB800',
+  color: '#D4A754',
   margin: '0 0 20px',
   textAlign: 'center' as const,
 }
@@ -38,9 +38,9 @@ export const text = {
   lineHeight: '1.6',
   margin: '0 0 20px',
 }
-export const link = { color: '#FFB800', textDecoration: 'underline' }
+export const link = { color: '#D4A754', textDecoration: 'underline' }
 export const button = {
-  backgroundColor: '#FFB800',
+  backgroundColor: '#D4A754',
   color: '#0A0A0A',
   fontSize: '14px',
   fontWeight: 'bold' as const,
@@ -56,12 +56,12 @@ export const footer = {
   margin: '30px 0 0',
   textAlign: 'center' as const,
 }
-export const footerLink = { color: '#FFB800', textDecoration: 'none' }
+export const footerLink = { color: '#D4A754', textDecoration: 'none' }
 export const codeStyle = {
   fontFamily: "'JetBrains Mono', Courier, monospace",
   fontSize: '28px',
   fontWeight: 'bold' as const,
-  color: '#FFB800',
+  color: '#D4A754',
   margin: '0 0 30px',
   letterSpacing: '4px',
   textAlign: 'center' as const,
