@@ -48,8 +48,8 @@ const ExportProgressModal = ({
         url: downloadUrl,
         filename: `aifilmz-export-${Date.now()}.mp4`,
         mimeType: "video/mp4",
-        title: "My AIFilmz Export",
-        text: "Made with AIFilmz",
+        title: "My That's A Wrap Export",
+        text: "Made with That's A Wrap",
       });
       if (result === "download") toast.success("Video downloaded");
     } catch (err: any) {

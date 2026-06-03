@@ -6,45 +6,45 @@
 
 @layer base {
   :root {
-    /* ═══ WEB3 GOLDEN HOUR TOKENS ═══ */
-    --background: 220 40% 5%;
-    --foreground: 42 30% 90%;
+    /* ═══ THAT'S A WRAP — METALLIC GOLD TOKENS ═══ */
+    --background: 0 0% 4%;
+    --foreground: 40 35% 88%;
 
-    --card: 220 35% 8%;
-    --card-foreground: 42 30% 90%;
+    --card: 0 0% 8%;
+    --card-foreground: 40 35% 88%;
 
-    --popover: 220 35% 8%;
-    --popover-foreground: 42 30% 90%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 40 35% 88%;
 
-    --primary: 38 90% 55%;
-    --primary-foreground: 220 40% 5%;
+    --primary: 40 55% 48%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 220 30% 10%;
-    --secondary-foreground: 42 30% 85%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 40 35% 85%;
 
-    --muted: 220 25% 12%;
-    --muted-foreground: 220 15% 50%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 40 10% 55%;
 
-    --accent: 210 100% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 40 55% 48%;
+    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 25% 15%;
-    --input: 220 25% 15%;
-    --ring: 38 90% 55%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 40 55% 48%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 220 40% 4%;
-    --sidebar-foreground: 42 30% 88%;
-    --sidebar-primary: 38 90% 55%;
-    --sidebar-primary-foreground: 220 40% 5%;
-    --sidebar-accent: 220 35% 10%;
-    --sidebar-accent-foreground: 42 30% 88%;
-    --sidebar-border: 220 25% 15%;
-    --sidebar-ring: 38 90% 55%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 40 30% 85%;
+    --sidebar-primary: 40 55% 48%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 40 30% 85%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 40 55% 48%;
 
     /* Extended palette */
     --teal: 184 80% 45%;
@@ -72,13 +72,13 @@
     --w3-text: #e8dcc8;
     --w3-text-muted: #7a8ba8;
 
-    /* Gold spectrum */
-    --gold: #d4940a;
-    --gold-light: #f5b731;
-    --gold-bright: #ffd666;
-    --gold-dark: #a67208;
-    --amber: #e8933c;
-    --amber-light: #f0b060;
+    /* Metallic Gold spectrum (from logo) */
+    --gold: #b8893a;
+    --gold-light: #d4a754;
+    --gold-bright: #e8c878;
+    --gold-dark: #7a5a22;
+    --amber: #c9942e;
+    --amber-light: #d9ab50;
 
     /* Deep blue spectrum */
     --deep-blue: #0a1e42;
@@ -88,11 +88,11 @@
     --ice-blue: #64b5f6;
 
     /* Alpha channels */
-    --gold-30: rgba(212, 148, 10, 0.3);
-    --gold-10: rgba(212, 148, 10, 0.1);
-    --gold-05: rgba(212, 148, 10, 0.05);
-    --amber-30: rgba(232, 147, 60, 0.3);
-    --amber-10: rgba(232, 147, 60, 0.1);
+    --gold-30: rgba(184, 137, 58, 0.3);
+    --gold-10: rgba(184, 137, 58, 0.1);
+    --gold-05: rgba(184, 137, 58, 0.05);
+    --amber-30: rgba(201, 148, 46, 0.3);
+    --amber-10: rgba(201, 148, 46, 0.1);
     --blue-deep-30: rgba(61, 139, 253, 0.3);
     --blue-deep-10: rgba(61, 139, 253, 0.1);
     --blue-deep-05: rgba(61, 139, 253, 0.05);
