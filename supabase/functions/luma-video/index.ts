@@ -58,9 +58,22 @@ serve(async (req) => {
     // ──────────────────────────────────────────────
     if (action === "poll") {
       const { generationId } = body;
-      if (!generationId) {
+      if (!generationId || typeof generationId !== "string") {
         return new Response(JSON.stringify({ error: "generationId required" }), {
           status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      // Verify ownership of this generation
+      const { data: gen, error: genErr } = await supabase
+        .from("video_generations")
+        .select("id, user_id, credited")
+        .eq("generation_id", generationId)
+        .maybeSingle();
+
+      if (genErr || !gen || gen.user_id !== userId) {
+        return new Response(JSON.stringify({ error: "Generation not found" }), {
+          status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
 
@@ -79,24 +92,31 @@ serve(async (req) => {
       console.log(`Poll for ${generationId}: state=${status.state}`);
 
       if (status.state === "completed") {
-        // Deduct credits on completion
-        const { data: credits } = await supabase
-          .from("user_credits")
-          .select("balance")
-          .eq("user_id", userId)
-          .maybeSingle();
+        // Deduct credits only once per generation
+        if (!gen.credited) {
+          const { data: credits } = await supabase
+            .from("user_credits")
+            .select("balance")
+            .eq("user_id", userId)
+            .maybeSingle();
 
-        const balance = credits?.balance ?? 100;
-        await supabase
-          .from("user_credits")
-          .update({ balance: balance - CREDIT_COST })
-          .eq("user_id", userId);
+          const balance = credits?.balance ?? 100;
+          await supabase
+            .from("user_credits")
+            .update({ balance: balance - CREDIT_COST })
+            .eq("user_id", userId);
 
-        await supabase.from("credit_transactions").insert({
-          user_id: userId,
-          amount: -CREDIT_COST,
-          action_type: "video_generation",
-        });
+          await supabase.from("credit_transactions").insert({
+            user_id: userId,
+            amount: -CREDIT_COST,
+            action_type: "video_generation",
+          });
+
+          await supabase
+            .from("video_generations")
+            .update({ credited: true, updated_at: new Date().toISOString() })
+            .eq("generation_id", generationId);
+        }
 
         return new Response(JSON.stringify({
           state: "completed",
@@ -112,7 +132,6 @@ serve(async (req) => {
         }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
       }
 
-      // Still processing
       return new Response(JSON.stringify({
         state: status.state,
       }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
@@ -179,7 +198,13 @@ serve(async (req) => {
     const generation = await createResp.json();
     console.log(`Luma generation created: ${generation.id}`);
 
-    // Return immediately with generation ID — client will poll
+    // Record ownership of this generation
+    await supabase.from("video_generations").insert({
+      user_id: userId,
+      generation_id: generation.id,
+      provider: "luma",
+    });
+
     return new Response(
       JSON.stringify({
         generationId: generation.id,

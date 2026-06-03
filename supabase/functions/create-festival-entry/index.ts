@@ -43,6 +43,23 @@ serve(async (req) => {
     const { shotId, category } = await req.json();
     if (!shotId || !category) throw new Error("shotId and category are required");
 
+    // Verify the shot belongs to the authenticated user (mirrors RLS that service role bypasses)
+    const { data: shotRow, error: shotErr } = await supabaseAdmin
+      .from("shots")
+      .select("id, project_id, projects!inner(user_id)")
+      .eq("id", shotId)
+      .maybeSingle();
+
+    if (shotErr || !shotRow || (shotRow as any).projects?.user_id !== user.id) {
+      logStep("Shot ownership check failed", { shotId });
+      return new Response(
+        JSON.stringify({ error: "Shot not found or access denied" }),
+        { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+
+
     // Check if user already used their free entry
     const { data: profile } = await supabaseAdmin
       .from("profiles")
