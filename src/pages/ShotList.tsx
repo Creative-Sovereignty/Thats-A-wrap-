@@ -100,14 +100,14 @@ const ShotList = () => {
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  // Realtime subscription
+  // Realtime subscription — private per-project channel enforced via realtime.messages RLS
   useEffect(() => {
     if (!projectId) return;
     const channel = supabase
-      .channel("shots-realtime")
+      .channel(`shots:${projectId}`, { config: { private: true } })
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "shots" },
+        { event: "*", schema: "public", table: "shots", filter: `project_id=eq.${projectId}` },
         () => {
           queryClient.invalidateQueries({ queryKey: ["shots-by-project", projectId] });
         }
@@ -115,6 +115,7 @@ const ShotList = () => {
       .subscribe();
     return () => { supabase.removeChannel(channel); };
   }, [projectId, queryClient]);
+
 
   const readyCount = shots.filter((s) => s.status === "ready").length;
 
