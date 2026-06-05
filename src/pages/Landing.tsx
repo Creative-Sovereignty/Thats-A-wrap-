@@ -397,7 +397,7 @@ const Landing = () => {
                 initial="hidden"
                 animate="visible"
                 className="contents">
-                <div className="relative inline-flex items-center justify-center gap-4 sm:gap-6 mt-1 mb-3 sm:mb-4 md:mb-5">
+                <div className="relative inline-flex flex-wrap items-center justify-center gap-3 sm:gap-5 md:gap-6 mt-1 mb-3 sm:mb-4 md:mb-5">
                   {/* Hero logo — sits to the left of the headline */}
                   <motion.div
                     className="shrink-0 w-32 h-32 sm:w-44 sm:h-44 md:w-60 md:h-60"
