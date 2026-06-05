@@ -8,12 +8,14 @@ export const TIERS = {
     product_id: "prod_UCioB4YN7q42vp",
     name: "Pro",
     price: "$29/mo",
+    credits_per_period: 300,
   },
   studio: {
     price_id: "price_1TEJN07pm1sWSXu2GWmTPF5r",
     product_id: "prod_UCio296kndLNzb",
     name: "Studio",
     price: "$79/mo",
+    credits_per_period: 1500,
   },
 } as const;
 
