@@ -391,30 +391,16 @@ const Landing = () => {
                 <Sparkles className="w-4 h-4 inline mr-1 -mt-0.5" />
                 Next-Gen Filmmaking
               </p>
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold tracking-tight leading-[1.05] sm:leading-[1.02] mb-3 sm:mb-4 md:mb-5 text-gold-blue-shimmer">
-                Your AI-Powered
-              </h1>
-              {/* Shared timeline: badge + hero logo animate from one orchestrator
-                  so they stay synchronized across re-renders & route transitions */}
+              {/* Shared timeline: logo + headline + subtitle animate from one orchestrator */}
               <motion.div
                 variants={heroStackVariants}
                 initial="hidden"
                 animate="visible"
                 className="contents">
                 <div className="relative inline-flex items-center justify-center gap-4 sm:gap-6 mt-1 mb-3 sm:mb-4 md:mb-5">
-                  <motion.span
-                    variants={heroBadgeVariants}
-                    className="inline-block px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-[var(--gold-dark)] via-[var(--gold)] to-[var(--gold-bright)] text-[var(--w3-void)] font-display font-black text-4xl sm:text-5xl md:text-7xl leading-[1] tracking-wide"
-                    style={{
-                      boxShadow: "0 0 40px var(--gold-30), 0 0 80px rgba(212, 148, 10, 0.1), inset 0 1px 0 rgba(255,255,255,0.2)"
-                    }}>
-                    
-                    Movie Studio
-                  </motion.span>
-
-                  {/* Hero logo — sits to the right of the Movie Studio badge */}
+                  {/* Hero logo — sits to the left of the headline */}
                   <motion.div
-                    className="shrink-0 w-32 h-32 sm:w-44 sm:h-44 md:w-60 md:h-60"
+                    className="shrink-0 w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36"
                     style={{
                       transformPerspective: 700,
                       rotateX,
@@ -441,7 +427,15 @@ const Landing = () => {
                       style={{ willChange: "transform, opacity" }}
                     />
                   </motion.div>
+
+                  <motion.h1
+                    variants={heroBadgeVariants}
+                    className="font-display font-black text-4xl sm:text-5xl md:text-7xl leading-[1] tracking-tight bg-clip-text text-transparent bg-[linear-gradient(110deg,var(--gold-dark),var(--gold-bright),#7a1f2b,var(--gold),var(--gold-dark))] bg-[length:200%_auto] animate-shimmer"
+                  >
+                    That's a wrap,
+                  </motion.h1>
                 </div>
+
 
 
                 {/* Subtitle — next beat in the synchronized timeline */}
