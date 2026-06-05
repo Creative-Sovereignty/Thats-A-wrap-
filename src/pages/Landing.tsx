@@ -445,10 +445,7 @@ const Landing = () => {
                   your AI-powered movie studio
                 </motion.p>
 
-                  
-                  From script to screen — write, storyboard, and visualize your films
-                  with AI tools that actually work, all in one place.
-                </motion.p>
+
 
                 {/* CTA buttons — final beat, staggered after subtitle */}
                 <motion.div
