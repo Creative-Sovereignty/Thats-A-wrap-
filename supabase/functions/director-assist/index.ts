@@ -268,6 +268,21 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
+    // Atomic credit deduction (3 credits per orchestrator call)
+    const CREDIT_COST = 3;
+    const { data: consumed, error: consumeErr } = await supabaseAdmin.rpc("consume_credits", {
+      _user_id: userId,
+      _amount: CREDIT_COST,
+      _action_type: "director_assist",
+    });
+    if (consumeErr) console.error("consume_credits failed", consumeErr);
+    if (consumed === false) {
+      return new Response(
+        JSON.stringify({ error: `Insufficient credits. Director AI costs ${CREDIT_COST} credits per request.`, out_of_credits: true }),
+        { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     // Verify project ownership if projectId is provided
     if (projectId) {
       const { data: project } = await supabaseAdmin
