@@ -46,9 +46,21 @@ export function useSubscription() {
       setSubscribed(data.subscribed);
       setSubscriptionEnd(data.subscription_end);
 
-      if (data.subscribed && data.product_id) {
-        const found = Object.entries(TIERS).find(([, t]) => t.product_id === data.product_id);
-        setTier(found ? (found[0] as TierKey) : "free");
+      if (data.subscribed) {
+        const found = data.product_id
+          ? Object.entries(TIERS).find(([, t]) => t.product_id === data.product_id)
+          : undefined;
+        if (found) {
+          setTier(found[0] as TierKey);
+        } else {
+          // Subscribed but product_id doesn't match known tiers (e.g. price/product
+          // was swapped in Stripe). Don't lock the user out — fall back to "pro".
+          console.warn(
+            "[useSubscription] Subscribed user with unknown product_id, defaulting to 'pro'.",
+            { product_id: data.product_id }
+          );
+          setTier("pro");
+        }
       } else {
         setTier("free");
       }
