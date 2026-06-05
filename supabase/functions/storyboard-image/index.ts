@@ -150,6 +150,14 @@ Make it look like a professional storyboard panel with dramatic lighting and com
       throw new Error("Failed to generate signed URL");
     }
 
+    // Atomic credit deduction after successful image generation + upload
+    const { error: consumeErr } = await supabaseAdmin.rpc("consume_credits", {
+      _user_id: userId,
+      _amount: CREDIT_COST,
+      _action_type: "storyboard_image",
+    });
+    if (consumeErr) console.error("consume_credits failed", consumeErr);
+
     return new Response(
       JSON.stringify({ imageUrl: signedUrlData.signedUrl }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
