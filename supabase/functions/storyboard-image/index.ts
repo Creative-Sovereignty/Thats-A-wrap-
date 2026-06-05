@@ -41,6 +41,25 @@ serve(async (req) => {
       }
     }
 
+    // Pre-flight credit check (atomic deduction after successful image upload)
+    const CREDIT_COST = 2;
+    const supabaseAdmin = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+    );
+    const { data: credits } = await supabaseAdmin
+      .from("user_credits")
+      .select("balance, subscription_balance")
+      .eq("user_id", userId)
+      .maybeSingle();
+    const totalBalance = (credits?.balance ?? 0) + (credits?.subscription_balance ?? 0);
+    if (totalBalance < CREDIT_COST) {
+      return new Response(
+        JSON.stringify({ error: `Insufficient credits. Storyboard images cost ${CREDIT_COST} credits.`, out_of_credits: true }),
+        { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const { scene, description, notes, frameId } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
@@ -130,6 +149,14 @@ Make it look like a professional storyboard panel with dramatic lighting and com
     if (signedError || !signedUrlData?.signedUrl) {
       throw new Error("Failed to generate signed URL");
     }
+
+    // Atomic credit deduction after successful image generation + upload
+    const { error: consumeErr } = await supabaseAdmin.rpc("consume_credits", {
+      _user_id: userId,
+      _amount: CREDIT_COST,
+      _action_type: "storyboard_image",
+    });
+    if (consumeErr) console.error("consume_credits failed", consumeErr);
 
     return new Response(
       JSON.stringify({ imageUrl: signedUrlData.signedUrl }),

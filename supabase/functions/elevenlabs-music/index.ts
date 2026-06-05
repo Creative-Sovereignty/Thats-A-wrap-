@@ -43,17 +43,17 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // Credit check
+    // Credit pre-check (atomic deduction happens AFTER successful generation)
     const { data: credits } = await supabase
       .from("user_credits")
-      .select("balance")
+      .select("balance, subscription_balance")
       .eq("user_id", userId)
       .maybeSingle();
 
-    const balance = credits?.balance ?? 100;
-    if (balance < CREDIT_COST) {
+    const totalBalance = (credits?.balance ?? 0) + (credits?.subscription_balance ?? 0);
+    if (totalBalance < CREDIT_COST) {
       return new Response(
-        JSON.stringify({ error: `Insufficient credits. Music generation costs ${CREDIT_COST} credits.` }),
+        JSON.stringify({ error: `Insufficient credits. Music generation costs ${CREDIT_COST} credits.`, out_of_credits: true }),
         { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -98,18 +98,19 @@ serve(async (req) => {
 
     const audioBuffer = await response.arrayBuffer();
 
-    // Deduct credits after successful generation
-    await supabase
-      .from("user_credits")
-      .update({ balance: balance - CREDIT_COST })
-      .eq("user_id", userId);
-
-    // Log transaction
-    await supabase.from("credit_transactions").insert({
-      user_id: userId,
-      amount: -CREDIT_COST,
-      action_type: isMusic ? "music_generation" : "sfx_generation",
+    // Atomic deduction (starter pool first, then subscription pool) after success.
+    const { data: consumed, error: consumeErr } = await supabase.rpc("consume_credits", {
+      _user_id: userId,
+      _amount: CREDIT_COST,
+      _action_type: isMusic ? "music_generation" : "sfx_generation",
     });
+    if (consumeErr) console.error("consume_credits failed", consumeErr);
+    if (consumed === false) {
+      return new Response(
+        JSON.stringify({ error: "Insufficient credits.", out_of_credits: true }),
+        { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     return new Response(audioBuffer, {
       headers: {

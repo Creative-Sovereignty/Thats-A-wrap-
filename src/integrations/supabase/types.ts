@@ -541,16 +541,25 @@ export type Database = {
       user_credits: {
         Row: {
           balance: number
+          plan: string
+          subscription_balance: number
+          subscription_period_end: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           balance?: number
+          plan?: string
+          subscription_balance?: number
+          subscription_period_end?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           balance?: number
+          plan?: string
+          subscription_balance?: number
+          subscription_period_end?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -660,6 +669,10 @@ export type Database = {
       }
     }
     Functions: {
+      consume_credits: {
+        Args: { _action_type?: string; _amount: number; _user_id: string }
+        Returns: boolean
+      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
@@ -695,6 +708,15 @@ export type Database = {
           msg_id: number
           read_ct: number
         }[]
+      }
+      refill_subscription_credits: {
+        Args: {
+          _amount: number
+          _period_end: string
+          _plan: string
+          _user_id: string
+        }
+        Returns: undefined
       }
       toggle_contest_vote: { Args: { _entry_id: string }; Returns: boolean }
     }

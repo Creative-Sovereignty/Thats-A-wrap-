@@ -92,30 +92,23 @@ serve(async (req) => {
       console.log(`Poll for ${generationId}: state=${status.state}`);
 
       if (status.state === "completed") {
-        // Deduct credits only once per generation
+        // Deduct credits only once per generation (atomic; starter first then subscription)
         if (!gen.credited) {
-          const { data: credits } = await supabase
-            .from("user_credits")
-            .select("balance")
-            .eq("user_id", userId)
-            .maybeSingle();
-
-          const balance = credits?.balance ?? 100;
-          await supabase
-            .from("user_credits")
-            .update({ balance: balance - CREDIT_COST })
-            .eq("user_id", userId);
-
-          await supabase.from("credit_transactions").insert({
-            user_id: userId,
-            amount: -CREDIT_COST,
-            action_type: "video_generation",
+          const { data: consumed, error: consumeErr } = await supabase.rpc("consume_credits", {
+            _user_id: userId,
+            _amount: CREDIT_COST,
+            _action_type: "video_generation",
           });
+          if (consumeErr) console.error("consume_credits failed", consumeErr);
 
-          await supabase
-            .from("video_generations")
-            .update({ credited: true, updated_at: new Date().toISOString() })
-            .eq("generation_id", generationId);
+          // Mark credited regardless — Luma already produced the video; we don't want to
+          // re-charge on subsequent polls. If consume failed we still log via the RPC.
+          if (consumed !== false) {
+            await supabase
+              .from("video_generations")
+              .update({ credited: true, updated_at: new Date().toISOString() })
+              .eq("generation_id", generationId);
+          }
         }
 
         return new Response(JSON.stringify({
@@ -142,17 +135,17 @@ serve(async (req) => {
     // ──────────────────────────────────────────────
     const { prompt, style, aspectRatio } = body;
 
-    // Credit check
+    // Pre-flight credit check (atomic deduction happens after Luma reports "completed")
     const { data: credits } = await supabase
       .from("user_credits")
-      .select("balance")
+      .select("balance, subscription_balance")
       .eq("user_id", userId)
       .maybeSingle();
 
-    const balance = credits?.balance ?? 100;
-    if (balance < CREDIT_COST) {
+    const totalBalance = (credits?.balance ?? 0) + (credits?.subscription_balance ?? 0);
+    if (totalBalance < CREDIT_COST) {
       return new Response(
-        JSON.stringify({ error: `Insufficient credits. Video generation costs ${CREDIT_COST} credits.` }),
+        JSON.stringify({ error: `Insufficient credits. Video generation costs ${CREDIT_COST} credits.`, out_of_credits: true }),
         { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
