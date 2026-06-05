@@ -26,6 +26,8 @@ Formatting rules:
 
 When the user shares their current script, analyze it and provide contextual suggestions. Be concise in your explanations but detailed in your script output.`;
 
+const CREDIT_COST = 1;
+
 serve(async (req) => {
   if (req.method === "OPTIONS")
     return new Response(null, { headers: corsHeaders });
@@ -41,9 +43,14 @@ serve(async (req) => {
     if (userError || !user) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
-
+    const userId = user.id;
     const userEmail = user.email as string;
 
+    // Service-role client for credit operations
+    const supabaseAdmin = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+    );
 
     // Server-side subscription check
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
@@ -58,6 +65,21 @@ serve(async (req) => {
       if (subs.data.length === 0) {
         return new Response(JSON.stringify({ error: "Subscription required. Please upgrade to Pro or Studio." }), { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } });
       }
+    }
+
+    // Atomic credit deduction (starter pool first, then subscription pool).
+    // For streamed responses we deduct up-front; the AI gateway request is short-lived.
+    const { data: consumed, error: consumeErr } = await supabaseAdmin.rpc("consume_credits", {
+      _user_id: userId,
+      _amount: CREDIT_COST,
+      _action_type: "script_assist",
+    });
+    if (consumeErr) console.error("consume_credits failed", consumeErr);
+    if (consumed === false) {
+      return new Response(
+        JSON.stringify({ error: `Insufficient credits. Script generation costs ${CREDIT_COST} credit.`, out_of_credits: true }),
+        { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
 
     const { messages, currentScript } = await req.json();
