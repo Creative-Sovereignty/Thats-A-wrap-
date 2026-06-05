@@ -135,17 +135,17 @@ serve(async (req) => {
     // ──────────────────────────────────────────────
     const { prompt, style, aspectRatio } = body;
 
-    // Credit check
+    // Pre-flight credit check (atomic deduction happens after Luma reports "completed")
     const { data: credits } = await supabase
       .from("user_credits")
-      .select("balance")
+      .select("balance, subscription_balance")
       .eq("user_id", userId)
       .maybeSingle();
 
-    const balance = credits?.balance ?? 100;
-    if (balance < CREDIT_COST) {
+    const totalBalance = (credits?.balance ?? 0) + (credits?.subscription_balance ?? 0);
+    if (totalBalance < CREDIT_COST) {
       return new Response(
-        JSON.stringify({ error: `Insufficient credits. Video generation costs ${CREDIT_COST} credits.` }),
+        JSON.stringify({ error: `Insufficient credits. Video generation costs ${CREDIT_COST} credits.`, out_of_credits: true }),
         { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
