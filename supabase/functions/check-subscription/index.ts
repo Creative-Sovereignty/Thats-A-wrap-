@@ -7,6 +7,12 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+// Plan amounts must match src/hooks/useSubscription.ts TIERS.credits_per_period
+const PLAN_CREDITS: Record<string, { plan: string; amount: number }> = {
+  prod_UCioB4YN7q42vp: { plan: "pro", amount: 300 },
+  prod_UCio296kndLNzb: { plan: "studio", amount: 1500 },
+};
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -49,13 +55,31 @@ serve(async (req) => {
     });
 
     const hasActiveSub = subscriptions.data.length > 0;
-    let productId = null;
-    let subscriptionEnd = null;
+    let productId: string | null = null;
+    let subscriptionEnd: string | null = null;
 
     if (hasActiveSub) {
       const subscription = subscriptions.data[0];
       subscriptionEnd = new Date(subscription.current_period_end * 1000).toISOString();
-      productId = subscription.items.data[0].price.product;
+      productId = subscription.items.data[0].price.product as string;
+
+      // Refill subscription credits when a new billing period starts (idempotent).
+      const planInfo = PLAN_CREDITS[productId];
+      if (planInfo) {
+        const { error: refillErr } = await supabaseClient.rpc("refill_subscription_credits", {
+          _user_id: user.id,
+          _plan: planInfo.plan,
+          _amount: planInfo.amount,
+          _period_end: subscriptionEnd,
+        });
+        if (refillErr) {
+          console.error("[check-subscription] refill_subscription_credits failed", refillErr);
+        }
+      } else {
+        console.warn(
+          `[check-subscription] Active subscription for user ${user.id} has unknown product_id ${productId}; skipping credit refill.`
+        );
+      }
     }
 
     return new Response(JSON.stringify({
