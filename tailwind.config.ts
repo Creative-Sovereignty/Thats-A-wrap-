@@ -117,12 +117,19 @@ export default {
           "0%": { backgroundPosition: "200% center" },
           "100%": { backgroundPosition: "-200% center" },
         },
+        "shimmer-cinematic": {
+          "0%": { backgroundPosition: "200% center", filter: "brightness(1) saturate(1)" },
+          "50%": { backgroundPosition: "0% center", filter: "brightness(1.18) saturate(1.15)" },
+          "100%": { backgroundPosition: "-200% center", filter: "brightness(1) saturate(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "shimmer": "shimmer 4s ease-in-out infinite",
+        "shimmer-cinematic": "shimmer-cinematic 7s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite",
       },
+
     },
   },
   plugins: [require("tailwindcss-animate")],
