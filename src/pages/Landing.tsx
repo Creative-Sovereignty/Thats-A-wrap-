@@ -430,7 +430,9 @@ const Landing = () => {
 
                   <motion.h1
                     variants={heroBadgeVariants}
-                    className="font-display font-black text-4xl sm:text-5xl md:text-7xl leading-[1] tracking-tight bg-clip-text text-transparent bg-[linear-gradient(110deg,var(--gold-dark),var(--gold-bright),#7a1f2b,var(--gold),var(--gold-dark))] bg-[length:200%_auto] animate-shimmer"
+                    className="font-normal text-5xl sm:text-6xl md:text-8xl leading-[1] tracking-tight bg-clip-text text-transparent bg-[linear-gradient(110deg,var(--gold-dark),var(--gold-bright),#7a1f2b,var(--gold),var(--gold-dark))] bg-[length:200%_auto] animate-shimmer"
+                    style={{ fontFamily: "'Allura', cursive" }}
+
                   >
                     That's a wrap,
                   </motion.h1>
