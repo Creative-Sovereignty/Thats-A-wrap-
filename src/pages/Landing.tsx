@@ -378,7 +378,7 @@ const Landing = () => {
 
 
         {/* Content */}
-        <motion.div style={{ opacity }} className="relative z-10 max-w-5xl mx-auto text-center">
+        <motion.div style={{ opacity }} className="relative z-10 max-w-7xl mx-auto text-center">
 
           {/* Headline with parallax */}
           <motion.div style={{ y: textY }}>
