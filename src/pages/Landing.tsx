@@ -400,7 +400,7 @@ const Landing = () => {
                 <div className="relative inline-flex flex-wrap items-center justify-center gap-3 sm:gap-5 md:gap-6 mt-1 mb-3 sm:mb-4 md:mb-5">
                   {/* Hero logo — sits to the left of the headline */}
                   <motion.div
-                    className="shrink-0 w-32 h-32 sm:w-44 sm:h-44 md:w-60 md:h-60"
+                    className="shrink-0 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-80 lg:h-80"
                     style={{
                       transformPerspective: 700,
                       rotateX,
