@@ -445,7 +445,7 @@ const Landing = () => {
                 {/* Subtitle — next beat in the synchronized timeline */}
                 <motion.p
                   variants={heroSubtitleVariants}
-                  className="font-display text-2xl sm:text-3xl md:text-4xl text-[var(--gold)] max-w-xl md:max-w-2xl mx-auto mt-2 mb-6 sm:mb-8 leading-tight tracking-wide">
+                  className="font-display text-3xl sm:text-4xl md:text-5xl text-[var(--gold)] max-w-2xl md:max-w-3xl mx-auto mt-4 mb-8 sm:mb-10 leading-tight tracking-wide">
                   your AI-powered movie studio
                 </motion.p>
 
