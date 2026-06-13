@@ -73,12 +73,13 @@
     --w3-text-muted: #7a8ba8;
 
     /* Metallic Gold spectrum (from logo) */
-    --gold: #b8893a;
-    --gold-light: #d4a754;
-    --gold-bright: #e8c878;
-    --gold-dark: #7a5a22;
-    --amber: #c9942e;
-    --amber-light: #d9ab50;
+    --gold: #d4af37;
+    --gold-light: #f5d061;
+    --gold-bright: #ffe07a;
+    --gold-dark: #8b6914;
+    --amber: #c9971a;
+    --amber-light: #e8b733;
+
 
     /* Deep blue spectrum */
     --deep-blue: #0a1e42;
