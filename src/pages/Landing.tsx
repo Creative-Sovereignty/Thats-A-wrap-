@@ -430,7 +430,7 @@ const Landing = () => {
 
                   <motion.h1
                     variants={heroBadgeVariants}
-                    className="text-gold-blue-shimmer font-normal text-5xl sm:text-6xl md:text-8xl leading-[1] tracking-tight drop-shadow-[0_2px_24px_rgba(212,148,10,0.35)] motion-reduce:animate-none"
+                    className="text-gold-blue-shimmer font-normal text-6xl sm:text-7xl md:text-9xl lg:text-[10rem] leading-[1] tracking-tight drop-shadow-[0_2px_24px_rgba(212,148,10,0.35)] motion-reduce:animate-none"
                     style={{ fontFamily: "'Allura', cursive", willChange: "background-position, filter" }}
 
 
