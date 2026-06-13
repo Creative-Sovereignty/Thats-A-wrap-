@@ -378,7 +378,7 @@ const Landing = () => {
 
 
         {/* Content */}
-        <motion.div style={{ opacity }} className="relative z-10 max-w-5xl mx-auto text-center">
+        <motion.div style={{ opacity }} className="relative z-10 max-w-7xl mx-auto text-center">
 
           {/* Headline with parallax */}
           <motion.div style={{ y: textY }}>
@@ -400,7 +400,7 @@ const Landing = () => {
                 <div className="relative inline-flex flex-wrap items-center justify-center gap-3 sm:gap-5 md:gap-6 mt-1 mb-3 sm:mb-4 md:mb-5">
                   {/* Hero logo — sits to the left of the headline */}
                   <motion.div
-                    className="shrink-0 w-32 h-32 sm:w-44 sm:h-44 md:w-60 md:h-60"
+                    className="shrink-0 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-80 lg:h-80"
                     style={{
                       transformPerspective: 700,
                       rotateX,
@@ -430,7 +430,7 @@ const Landing = () => {
 
                   <motion.h1
                     variants={heroBadgeVariants}
-                    className="text-gold-blue-shimmer font-normal text-5xl sm:text-6xl md:text-8xl leading-[1] tracking-tight drop-shadow-[0_2px_24px_rgba(212,148,10,0.35)] motion-reduce:animate-none"
+                    className="text-gold-blue-shimmer font-normal text-6xl sm:text-7xl md:text-9xl lg:text-[10rem] leading-[1] tracking-tight drop-shadow-[0_2px_24px_rgba(212,148,10,0.35)] motion-reduce:animate-none"
                     style={{ fontFamily: "'Allura', cursive", willChange: "background-position, filter" }}
 
 
@@ -445,7 +445,7 @@ const Landing = () => {
                 {/* Subtitle — next beat in the synchronized timeline */}
                 <motion.p
                   variants={heroSubtitleVariants}
-                  className="font-display text-2xl sm:text-3xl md:text-4xl text-[var(--gold)] max-w-xl md:max-w-2xl mx-auto mt-2 mb-6 sm:mb-8 leading-tight tracking-wide">
+                  className="font-display text-3xl sm:text-4xl md:text-5xl text-[var(--gold)] max-w-2xl md:max-w-3xl mx-auto mt-4 mb-8 sm:mb-10 leading-tight tracking-wide">
                   your AI-powered movie studio
                 </motion.p>
 
